@@ -1,0 +1,15 @@
+<h1>Leave a Review for: <%= listing.title %></h1>
+
+<form action="/listings/<%= listing._id %>/reviews" method="POST">
+  <label for="rating">Rating (1 to 5):</label>
+  <input type="number" id="rating" name="review[rating]" min="1" max="5" required>
+
+  <br>
+
+  <label for="comment">Comment:</label>
+  <textarea id="comment" name="review[comment]" rows="4" cols="50" placeholder="Write your feedback..."></textarea>
+
+  <br>
+
+  <button type="submit">Submit Review</button>
+</form>

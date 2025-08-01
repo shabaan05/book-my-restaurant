@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Listings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CDN (place inside <head>) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+     <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<%- include('includes/navbar') %>
+<%- include('flash') %>
+
+<br>
+<br>
+    <h1>All Listings</h1>
+    <br>
+  <a href="/listings/new" class="btn btn-success">Add New</a>
+
+
+<div class="container mt-5">
+  <div class="row gy-3">
+    <% allListings.forEach(listing => { %>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="<%= listing.img %>" class="card-img-top" alt="<%= listing.title %>">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title"><%= listing.title %></h5>
+            <p class="fw-bold mt-auto">₹<%= listing.price %></p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-outline-primary">Show</a>
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+            <form action="/listings/<%= listing._id %>/delete" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+
+
+
+        </div>
+        <hr>
+
+
+    <%- include("includes/footer") %>
+
+</body>
+</html>

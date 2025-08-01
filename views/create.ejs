@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Listing</title>
+    <style>
+        /* Styling for the Create Listing form */
+.create-form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.create-form h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+.create-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.create-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.create-form button {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+    background-color: #ff385c;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-form button:hover {
+    background-color: #e11d48;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Create New Listing</h1>
+
+      <form action="/listings" method="POST" class="create-form">
+        <h1>Create New Listing</h1>
+
+        <label for="title">Title:</label>
+        <input type="text" name="listing[title]" id="title" required>
+
+        <label for="description">Description:</label>
+        <input type="text" name="listing[description]" id="description" required>
+
+        <label for="img">Image URL:</label>
+        <input type="text" name="listing[img]" id="img">
+
+        <label for="price">Price (₹):</label>
+        <input type="number" name="listing[price]" id="price" required>
+
+        <label for="location">Location:</label>
+        <input type="text" name="listing[location]" id="location" required>
+
+        <label for="country">Country:</label>
+        <input type="text" name="listing[country]" id="country" required>
+
+        <button type="submit">Save Listing</button>
+    </form>
+     
+
+</body>
+</html>
