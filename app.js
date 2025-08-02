@@ -11,6 +11,10 @@ const app = express();
 const engine = require('ejs-mate'); 
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user'); // make sure the path is correct
+
 
 // const MongoStore = require('connect-mongo');
 
@@ -45,6 +49,14 @@ app.use(session({
         // sameSite: 'lax'           
     }
 }));
+// signup passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate())); 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// flash middleware
 app.use(flash());
 
 // storing something to show in cookie in browser
@@ -59,6 +71,23 @@ app.use((req, res, next) => {
 });
 
 // signup routes
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', async (req, res) => {
+    try {
+        const { username, password, email } = req.body;
+        const user = new User({ username, email });
+        const registeredUser = await User.register(user, password);
+        req.login(registeredUser, err => {
+            if (err) return next(err);
+            res.redirect('/listings');
+        });
+    } catch (e) {
+        res.send('Error: ' + e.message);
+    }
+});
 
 
 // Routes
